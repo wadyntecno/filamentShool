@@ -3,11 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Filament\Models\Contracts\HasTenants;
+use Filament\Tables\Columns\Layout\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable //implements HasTenants
 {
     use HasFactory, Notifiable;
 
@@ -44,4 +47,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+/*
+    public function canAccessTenant(Model $tenant):bool
+    {
+        return $this->teams->contains();
+    }
+
+    public function getTenants(Panel $panel):array|Collection
+    {
+        return $this->team;
+    }
+
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class);
+    }
+*/
 }

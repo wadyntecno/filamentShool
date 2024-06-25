@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Standard;
 use App\Models\Student;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,7 +23,19 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('cris9876'),
         // ]);
 
-        Student::factory(10)->create();
+        // Student::factory(10)->create();
 
+        $data = collect();
+
+        for ($i = 1; $i <= 10; $i++) {
+            $data->push([
+                "name" => "Std {$i}",
+                'class_number' => $i,
+            ]);
+        }
+
+        Standard::factory()->createMany($data);
+
+        $this->call(StandardSeeder::class);
     }
 }

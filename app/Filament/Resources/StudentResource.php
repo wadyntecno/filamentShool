@@ -28,10 +28,19 @@ class StudentResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('student_id')->required(),
-                Forms\Components\TextInput::make('adress_1'),
-                Forms\Components\TextInput::make('adress_2'),
+                Forms\Components\TextInput::make('name')->required()
+                ->label('Nome')
+                ->minLength(5)
+                ->maxLength(255),
+                Forms\Components\TextInput::make('student_id')->required()
+                ->label('Nª')
+                ->maxLength(10),
+                Forms\Components\TextInput::make('adress_1')->required()
+                ->label('Estado')
+                ->maxLength(255),
+                Forms\Components\TextInput::make('adress_2')->required()
+                ->label('Endereço')
+                ->maxLength(255),
 
             ]);
     }
@@ -40,10 +49,19 @@ class StudentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('student_id'),
-                Tables\Columns\TextColumn::make('adress_1'),
-                Tables\Columns\TextColumn::make('adress_2'),
+                Tables\Columns\TextColumn::make('name')
+                ->searchable()->searchable()
+                ->label('Nome'),
+
+                Tables\Columns\TextColumn::make('student_id')
+                ->label('Nª'),
+                
+                Tables\Columns\TextColumn::make('adress_1')
+                ->searchable()
+                ->label('Estado'),
+                Tables\Columns\TextColumn::make('adress_2')
+                ->label('Endereço'),
+
             ])
             ->filters([
                 
@@ -69,8 +87,8 @@ class StudentResource extends Resource
     {
         return [
             'index' => Pages\ListStudents::route('/'),
-            'create' => Pages\CreateStudent::route('/create'),
-            'edit' => Pages\EditStudent::route('/{record}/edit'),
+            // 'create' => Pages\CreateStudent::route('/create'),
+            // 'edit' => Pages\EditStudent::route('/{record}/edit'),
         ];
     }
 }
